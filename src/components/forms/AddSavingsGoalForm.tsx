@@ -10,7 +10,10 @@ import { toast } from "sonner";
 
 const formSchema = z.object({
   title: z.string().min(2, "Title must be at least 2 characters"),
-  targetAmount: z.string().transform((val) => parseFloat(val)),
+  targetAmount: z.string().transform((val) => {
+    const parsed = parseFloat(val);
+    return isNaN(parsed) ? 0 : parsed;
+  }),
   targetDate: z.string().optional(),
   category: z.string(),
 });
