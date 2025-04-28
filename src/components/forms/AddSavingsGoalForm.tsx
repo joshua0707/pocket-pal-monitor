@@ -18,10 +18,10 @@ const formSchema = z.object({
   category: z.string(),
 });
 
-const AddSavingsGoalForm = ({ onSuccess }: { onSuccess: () => void }) => {
+const AddSavingsGoalForm = ({ onSuccess }) => {
   const { addSavingsGoal } = useExpense();
   
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
@@ -31,7 +31,7 @@ const AddSavingsGoalForm = ({ onSuccess }: { onSuccess: () => void }) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values) => {
     addSavingsGoal({
       title: values.title,
       targetAmount: values.targetAmount,
